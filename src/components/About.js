@@ -83,7 +83,7 @@ export default function About() {
         <img
           className="w-[38rem] max-w-none rounded-xl shadow-xl ring-2 ring-base-300 sm:w-[57rem]"
           src="../back.jpg"
-          alt="Piyush Image"
+          alt="Portrait Photo"
         />
       </div>
 
