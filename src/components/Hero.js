@@ -203,6 +203,7 @@ export default function Hero() {
                   <a
                     href="https://www.linkedin.com/in/piyush-govindani/"
                     target="_blank"
+                    rel="noreferrer"
                     className="btn btn-outline btn-square"
                   >
                     <svg
@@ -218,6 +219,7 @@ export default function Hero() {
                   <a
                     href="https://github.com/piyush5090"
                     target="_blank"
+                    rel="noreferrer"
                     className="btn btn-outline btn-square"
                   >
                     <svg

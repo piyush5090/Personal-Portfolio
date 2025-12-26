@@ -56,7 +56,7 @@ export default function About() {
       {/* TITLE + SUMMARY */}
       <div className="mx-auto max-w-3xl lg:max-w-5xl lg:px-8">
         <h2 className="text-lg leading-7">
-          <a href="https://sam-folio.vercel.app" target="_blank">
+          <a href="https://sam-folio.vercel.app" target="_blank" rel="noreferrer">
             Get to know more
           </a>
         </h2>
