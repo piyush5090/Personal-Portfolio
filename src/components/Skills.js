@@ -1,137 +1,84 @@
 import { useEffect } from "react";
-import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-const frontend = [
-  {
-    name: "HTML/CSS",
-    value: 80,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "JavaScript",
-    value: 70,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "React",
-    value: 80,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "Next.js",
-    value: 60,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "TailwindCSS",
-    value: 80,
-    icon: CheckCircleIcon,
-  },
-];
-const backend = [
-  {
-    name: "NodeJS",
-    value: 30,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "Python",
-    value: 75,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "MySQL",
-    value: 50,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "APIs",
-    value: 20,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "MongoDB",
-    value: 40,
-    icon: CheckCircleIcon,
-  },
-  {
-    name: "GraphQL",
-    value: 30,
-    icon: CheckCircleIcon,
-  },
+/* ICONS */
+import {
+  SiJavascript, SiCplusplus, SiMysql, SiMongodb,
+  SiReact, SiTailwindcss, SiNodedotjs, SiExpress, SiRedux,
+  SiGithub, SiGit, SiJsonwebtokens, SiPostman, SiFigma
+} from "react-icons/si";
+
+import { FaJava } from "react-icons/fa";
+import { TbLetterC } from "react-icons/tb";
+import { BsCodeSlash } from "react-icons/bs";
+import { MdExtension } from "react-icons/md";
+
+const skills = [
+  /* LANGUAGES & DB */
+  { name: "Java", icon: FaJava, color: "#ED8B00" },
+  { name: "JavaScript (ES6+)", icon: SiJavascript, color: "#F7DF1E" },
+  { name: "C", icon: TbLetterC, color: "#283593" },
+  { name: "C++", icon: SiCplusplus, color: "#6296CC" },
+  { name: "SQL", icon: SiMysql, color: "#00758F" },
+  { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+
+  /* FRONTEND */
+  { name: "React.js", icon: SiReact, color: "#61DBFB" },
+  { name: "TailwindCSS", icon: SiTailwindcss, color: "#38BDF8" },
+  { name: "Redux Toolkit", icon: SiRedux, color: "#764ABC" },
+  
+  /* BACKEND */
+  { name: "Node.js", icon: SiNodedotjs, color: "#3C873A" },
+  { name: "Express.js", icon: SiExpress, color: "#FFFFFF" },
+  { name: "REST APIs", icon: BsCodeSlash, color: "#FFFFFF" },
+  { name: "JWT Auth", icon: SiJsonwebtokens, color: "#000000" },
+
+  /* TOOLS */
+  { name: "Git", icon: SiGit, color: "#F05032" },
+  { name: "GitHub", icon: SiGithub, color: "#FFFFFF" },
+  { name: "Figma", icon: SiFigma, color: "#F24E1E" },
+  { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+
+  /* OTHER */
+  { name: "Automation / Extensions", icon: MdExtension, color: "#4285F4" },
 ];
 
 export default function Skills() {
   useEffect(() => {
-    AOS.init({ duration: 2000 });
+    AOS.init({ duration: 1500 });
   }, []);
+
   return (
-    <div className="py-24 sm:py-32" id="skills">
+    <div className="py-24 sm:py-32 overflow-hidden" id="skills">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-xl leading-7">Explore my</h2>
+
+        {/* HEADER */}
+        <div className="mx-auto max-w-2xl text-center mb-10">
+          <h2 className="text-xl leading-7">My Tech Stack</h2>
           <p className="mt-2 text-4xl font-bold tracking-tight sm:text-6xl">
             Skills
           </p>
         </div>
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:gap-y-10">
-          <div
-            className="mt-10 max-w-2xl sm:mt-10 lg:mt-10 lg:max-w-4xl bg-base-200 ring-2 ring-base-300 rounded-2xl p-5 shadow-xl"
-            data-aos="zoom-in"
-          >
-            <p className="text-2xl text-center font-bold mb-6">
-              Frontend Development
-            </p>
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-6 lg:max-w-none lg:grid-cols-2 lg:gap-y-6">
-              {frontend.map((frontend) => (
-                <div key={frontend.name} className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg">
-                      <frontend.icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
-                    {frontend.name}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7">
-                    <progress
-                      className="progress w-3/4"
-                      value={frontend.value}
-                      max="100"
-                    ></progress>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-          <div
-            className="mt-10 max-w-2xl sm:mt-10 lg:mt-10 lg:max-w-4xl bg-base-200 ring-2 ring-base-300 rounded-2xl p-5 shadow-xl"
-            data-aos="zoom-in"
-          >
-            <p className="text-2xl text-center font-bold mb-6">
-              Backend Development
-            </p>
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-6 lg:max-w-none lg:grid-cols-2 lg:gap-y-6">
-              {backend.map((backend) => (
-                <div key={backend.name} className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg">
-                      <backend.icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
-                    {backend.name}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7">
-                    <progress
-                      className="progress w-3/4"
-                      value={backend.value}
-                      max="100"
-                    ></progress>
-                  </dd>
-                </div>
-              ))}
-            </dl>
+
+        {/* INFINITE LOOP CAROUSEL */}
+        <div className="relative w-full overflow-hidden">
+          <div className="flex w-max animate-loop-scroll">
+            {[...skills, ...skills].map((skill, index) => (
+              <div
+                key={index}
+                className="min-w-[140px] mx-4 bg-base-200 rounded-xl shadow-md 
+                           ring-1 ring-base-300 p-5 flex flex-col items-center 
+                           justify-center hover:scale-105 transition-transform 
+                           duration-300 cursor-default"
+              >
+                <skill.icon className="h-10 w-10 mb-3" style={{ color: skill.color }} />
+                <p className="font-semibold text-center whitespace-nowrap">{skill.name}</p>
+              </div>
+            ))}
           </div>
         </div>
+
       </div>
     </div>
   );

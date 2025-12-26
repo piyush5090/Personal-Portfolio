@@ -1,11 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import toast from "react-hot-toast";
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.target);
+    formData.append("access_key", "87c96a4a-1bff-4ef6-8d8c-cab5e8fca1e3"); // <-- Add key here
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    }).then((res) => res.json());
+
+    setLoading(false);
+
+    if (res.success) {
+      toast.success("Message sent successfully 🚀");
+      e.target.reset();
+    } else {
+      toast.error("Failed to send message ❌");
+    }
+  };
+
   return (
     <div className="py-24 sm:py-32" id="contact">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -15,89 +41,57 @@ export default function Contact() {
             Contact Me
           </p>
         </div>
+
         <form
-          action=""
-          method="POST"
+          onSubmit={handleSubmit}
           className="mx-auto mt-16 max-w-xl sm:mt-20"
           data-aos="zoom-in"
         >
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div>
-              <label
-                htmlFor="first-name"
-                className="block text-sm font-semibold leading-6"
-              >
-                First name
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  required
-                  name="first-name"
-                  id="first-name"
-                  autoComplete="given-name"
-                  className="block bg-transparent w-full rounded-md border-0 px-3.5 py-2 text-current ring-1 ring-inset ring-base-content focus:ring-2 focus:ring-inset focus:ring-current sm:text-sm sm:leading-6"
-                />
-              </div>
+              <label className="block text-sm font-semibold">First name</label>
+              <input
+                type="text"
+                required
+                name="firstName"
+                className="mt-2.5 block bg-transparent w-full rounded-md border-0 px-3.5 py-2 ring-1 ring-base-content focus:ring-current"
+              />
             </div>
+
             <div>
-              <label
-                htmlFor="last-name"
-                className="block text-sm font-semibold leading-6"
-              >
-                Last name
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  required
-                  name="last-name"
-                  id="last-name"
-                  autoComplete="family-name"
-                  className="block bg-transparent w-full rounded-md border-0 px-3.5 py-2 text-current ring-1 ring-inset ring-base-content focus:ring-2 focus:ring-inset focus:ring-current sm:text-sm sm:leading-6"
-                />
-              </div>
+              <label className="block text-sm font-semibold">Last name</label>
+              <input
+                type="text"
+                required
+                name="lastName"
+                className="mt-2.5 block bg-transparent w-full rounded-md border-0 px-3.5 py-2 ring-1 ring-base-content focus:ring-current"
+              />
             </div>
+
             <div className="sm:col-span-2">
-              <label
-                htmlFor="email"
-                className="block text-sm font-semibold leading-6"
-              >
-                Email
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="email"
-                  required
-                  name="email"
-                  id="email"
-                  autoComplete="email"
-                  className="block bg-transparent w-full rounded-md border-0 px-3.5 py-2 text-current ring-1 ring-inset ring-base-content focus:ring-2 focus:ring-inset focus:ring-current sm:text-sm sm:leading-6"
-                />
-              </div>
+              <label className="block text-sm font-semibold">Email</label>
+              <input
+                type="email"
+                required
+                name="email"
+                className="mt-2.5 block bg-transparent w-full rounded-md border-0 px-3.5 py-2 ring-1 ring-base-content focus:ring-current"
+              />
             </div>
+
             <div className="sm:col-span-2">
-              <label
-                htmlFor="message"
-                className="block text-sm font-semibold leading-6"
-              >
-                Message
-              </label>
-              <div className="mt-2.5">
-                <textarea
-                  name="message"
-                  required
-                  id="message"
-                  rows={4}
-                  className="block bg-transparent w-full rounded-md border-0 px-3.5 py-2 text-current ring-1 ring-inset ring-base-content focus:ring-2 focus:ring-inset focus:ring-current sm:text-sm sm:leading-6"
-                  defaultValue={""}
-                />
-              </div>
+              <label className="block text-sm font-semibold">Message</label>
+              <textarea
+                name="message"
+                required
+                rows={4}
+                className="mt-2.5 block bg-transparent w-full rounded-md border-0 px-3.5 py-2 ring-1 ring-base-content focus:ring-current"
+              />
             </div>
           </div>
+
           <div className="mt-10">
-            <button type="submit" className="btn btn-outline text-sm w-full">
-              Send it
+            <button type="submit" className="btn btn-outline w-full" disabled={loading}>
+              {loading ? "Sending..." : "Send it"}
             </button>
           </div>
         </form>
