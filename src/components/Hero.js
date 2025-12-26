@@ -20,23 +20,39 @@ const navigation = [
 ];
 
 export default function Hero() {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // DEFAULT THEME = DARK
+// DEFAULT to DARK mode
+const [theme, setTheme] = useState(
+  localStorage.getItem("theme") || "dark"
+);
 
-  useEffect(() => {
-    AOS.init({ duration: 2000 });
-  }, []);
+useEffect(() => {
+  localStorage.setItem("theme", theme);
+  document.documentElement.setAttribute("data-theme", theme);
+}, [theme]);
 
-  const handleToggle = (e) => {
-    e.target.checked ? setTheme("dark") : setTheme("light");
-  };
+// const handleToggle = (e) => {
+//   setTheme(e.target.checked ? "dark" : "light");
+// };
+
+
+// MOBILE MENU STATE
+const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+// AOS ANIMATIONS
+useEffect(() => {
+  AOS.init({ duration: 2000 });
+}, []);
+
+// DARK <-> LIGHT TOGGLE
+const handleToggle = (e) => {
+  if (e.target.checked) {
+    setTheme("dark");
+  } else {
+    setTheme("light");
+  }
+};
+
 
   return (
     <div>
@@ -108,7 +124,7 @@ export default function Hero() {
                   type="checkbox"
                   className="hidden"
                   onChange={handleToggle}
-                  checked={theme === "light" ? false : true}
+                  checked={theme === "dark"} 
                 />
                 <SunIcon className="swap-off fill-current w-6 h-6" />
                 <MoonIcon className="swap-on fill-current w-6 h-6" />
