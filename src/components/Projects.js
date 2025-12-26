@@ -129,6 +129,7 @@ export default function Projects() {
                     <a
                       href={project.href}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="bg-black/70 text-white px-4 py-2 rounded-lg font-semibold text-sm"
                     >
                       LIVE
@@ -136,12 +137,14 @@ export default function Projects() {
                     <a
                       href={project.github}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="bg-black/70 text-white px-4 py-2 rounded-lg font-semibold text-sm"
                     >
                       GITHUB
                     </a>
                   </div>
                 )}
+
               </div>
 
               {/* DETAILS */}
